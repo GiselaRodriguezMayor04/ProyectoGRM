@@ -10,7 +10,7 @@ function Reports() {
   const [pic, setPicado] = useState(false);
 
   const fetchItems = () => {
-    fetch(http://localhost:3030/getItems)
+    fetch("http://localhost:3030/getItems")
       .then((response) => response.json())
       .then((response) => {
         console.log("Datos recibidos del backend:", response.data);

@@ -17,16 +17,16 @@ import DeleteForeverIcon from '@mui/icons-material/Delete';
 interface ItemType {
   id?: number;
   nombre: string;
-  marca: string;
-  tipo: string;
-  precio: number;
+  login: string;
+  password: string;
+  rol: string;
 }
 
 const itemInitialState: ItemType = {
   nombre: '',
-  marca: '',
-  tipo: '',
-  precio: 0
+  login: '',
+  password: '',
+  rol: '',
 };
 
 const Dashboard: React.FC = () => {
@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3030/addItem?nombre=${item.nombre}&marca=${item.marca}&tipo=${item.tipo}&precio=${item.precio}`);
+      const response = await fetch(`http://localhost:3030/addItem?nombre=${item.nombre}&login=${item.login}&password=${item.password}&rol=${item.rol}`);
       const result = await response.json();
       if (result > 0) {
         alert("Datos guardados con éxito");
@@ -99,31 +99,31 @@ const Dashboard: React.FC = () => {
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Marca'
+                label='login'
                 variant='outlined'
                 fullWidth
-                value={item.marca}
-                onChange={(e) => setItem({ ...item, marca: e.target.value })}
+                value={item.login}
+                onChange={(e) => setItem({ ...item, login: e.target.value })}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Tipo'
+                label='password'
                 variant='outlined'
                 fullWidth
-                value={item.tipo}
-                onChange={(e) => setItem({ ...item, tipo: e.target.value })}
+                value={item.password}
+                onChange={(e) => setItem({ ...item, password: e.target.value })}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Precio'
+                label='rol'
                 variant='outlined'
                 fullWidth
-                value={item.precio}
-                onChange={(e) => setItem({ ...item, precio: parseFloat(e.target.value) })}
+                value={item.rol}
+                onChange={(e) => setItem({ ...item, rol: e.target.value })}
               />
             </Grid>
           </Grid>
@@ -138,13 +138,13 @@ const Dashboard: React.FC = () => {
 
       <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
         <Table sx={{ minWidth: 650 }} aria-label="Tabla Colecciones">
-          <TableHead sx={{ backgroundColor: "#0a2837" }}>
+          <TableHead sx={{ backgroundColor: "#d05eff" }}>
             <TableRow>
               <TableCell></TableCell>
               <TableCell sx={{ color: "white" }}>Nombre</TableCell>
-              <TableCell sx={{ color: "white" }}>Marca</TableCell>
-              <TableCell sx={{ color: "white" }}>Tipo</TableCell>
-              <TableCell sx={{ color: "white" }}>Precio</TableCell>
+              <TableCell sx={{ color: "white" }}>Login</TableCell>
+              <TableCell sx={{ color: "white" }}>password</TableCell>
+              <TableCell sx={{ color: "white" }}>rol</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -156,9 +156,9 @@ const Dashboard: React.FC = () => {
                   </Button>
                 </TableCell>
                 <TableCell>{row.nombre}</TableCell>
-                <TableCell>{row.marca}</TableCell>
-                <TableCell>{row.tipo}</TableCell>
-                <TableCell>{row.precio}</TableCell>
+                <TableCell>{row.login}</TableCell>
+                <TableCell>{row.password}</TableCell>
+                <TableCell>{row.rol}</TableCell>
               </TableRow>
             ))}
           </TableBody>

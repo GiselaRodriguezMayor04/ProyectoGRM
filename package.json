@@ -5,6 +5,7 @@
     "@material-table/core": "^6.4.4",
     "@material-table/exporters": "^1.2.19",
     "@mui/icons-material": "^6.1.5",
-    "@mui/material": "^6.1.5"
+    "@mui/material": "^6.1.5",
+    "react-router-dom": "^7.0.1"
   }
 }
