@@ -4,15 +4,15 @@ const helper = require('../helper');
 async function insertData(req, res) {
     const data = req.query
     const result = await db.query(
-        `insert into usuarios(nombre,login,password,rol) values(?,?,?,?)`,
-        [data.nombre,data.login,data.password,data.rol]
+        `insert into coleccion(nombre,marca,tipo,precio) values(?,?,?,?)`,
+        [data.nombre,data.marca,data.tipo,data.precio]
     )
     return result.affectedRows
 }
 
 async function getData(req, res) {
     const rows = await db.query(
-        `Select * from usuarios`
+        `Select * from coleccion`
     )
     const data = helper.emptyOrRows(rows)
     return {
@@ -23,7 +23,7 @@ async function getData(req, res) {
 async function deleteData(req, res) {
     const data = req.query
     const result = await db.query(
-        `Delete from usuarios where id = ${data.id}`
+        `Delete from coleccion where id = ${data.id}`
     )
     return result.affectedRows
 }
