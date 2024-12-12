@@ -1,5 +1,3 @@
-//Aquí se cambia la tabla
-
 const db = require('./db')
 const helper = require('../helper')
 
