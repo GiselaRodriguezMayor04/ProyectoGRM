@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { getData, insertData, deleteData } = require('./services/items');
 const login = require('./services/login');
+const deval = require('./services/deval');
 
 const port = 3030;
 
@@ -46,6 +47,37 @@ app.get('/getItems', async (req, res, next) => {
 app.get('/deleteItem', async (req, res, next) => {
     try {
         const result = await deleteData(req);
+        res.json(result);
+    } catch (err) {
+        console.error('Error while deleting items:', err.message);
+        next(err);
+    }
+});
+
+
+app.get('/adddeval', async (req, res, next) => {
+    try {
+        const result = await deval.insertDataDeval(req);
+        res.json(result);
+    } catch (err) {
+        console.error('Error while inserting items:', err.message);
+        next(err);
+    }
+});
+
+app.get('/getdeval', async (req, res, next) => {
+    try {
+        const result = await deval.getDataDeval(req);
+        res.json(result);
+    } catch (err) {
+        console.error('Error while getting items:', err.message);
+        next(err);
+    }
+});
+
+app.get('/deletedeval', async (req, res, next) => {
+    try {
+        const result = await deval.deleteDataDeval(req);
         res.json(result);
     } catch (err) {
         console.error('Error while deleting items:', err.message);

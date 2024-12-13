@@ -16,17 +16,15 @@ import DeleteForeverIcon from '@mui/icons-material/Delete';
 
 interface ItemType {
   id?: number;
-  nombre: string;
-  marca: string;
-  tipo: string;
-  precio: number;
+  articulo: string;
+  meses: string;
+  devaluacion: string;
 }
 
 const itemInitialState: ItemType = {
-  nombre: '',
-  marca: '',
-  tipo: '',
-  precio: 0
+  articulo: '',
+  meses: '',
+  devaluacion: '',
 };
 
 const Dashboard: React.FC = () => {
@@ -35,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`http://localhost:3030/getItems`);
+      const response = await fetch(`http://localhost:3030/getdeval`);
       const data = await response.json();
       setTableData(data.data || []);
     } catch (error) {
@@ -46,7 +44,7 @@ const Dashboard: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3030/addItem?nombre=${item.nombre}&marca=${item.marca}&tipo=${item.tipo}&precio=${item.precio}`);
+      const response = await fetch(`http://localhost:3030/adddeval?articulo=${item.articulo}&meses=${item.meses}&devaluacion=${item.devaluacion}`);
       const result = await response.json();
       if (result > 0) {
         alert("Datos guardados con éxito");
@@ -63,7 +61,7 @@ const Dashboard: React.FC = () => {
 
   const handleDeleteItem = async (item: ItemType) => {
     try {
-      const response = await fetch(`http://localhost:3030/deleteItem?id=${item.id}`);
+      const response = await fetch(`http://localhost:3030/deletedeval?id=${item.id}`);
       const result = await response.json();
       if (result > 0) {
         alert("Elemento eliminado con éxito");
@@ -89,41 +87,31 @@ const Dashboard: React.FC = () => {
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Nombre'
+                label='articulo'
                 variant='outlined'
                 fullWidth
-                value={item.nombre}
-                onChange={(e) => setItem({ ...item, nombre: e.target.value })}
+                value={item.articulo}
+                onChange={(e) => setItem({ ...item, articulo: e.target.value })}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Marca'
+                label='meses'
                 variant='outlined'
                 fullWidth
-                value={item.marca}
-                onChange={(e) => setItem({ ...item, marca: e.target.value })}
+                value={item.meses}
+                onChange={(e) => setItem({ ...item, meses: e.target.value })}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
                 required
-                label='Tipo'
+                label='devaluacion'
                 variant='outlined'
                 fullWidth
-                value={item.tipo}
-                onChange={(e) => setItem({ ...item, tipo: e.target.value })}
-              />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <TextField
-                required
-                label='Precio'
-                variant='outlined'
-                fullWidth
-                value={item.precio}
-                onChange={(e) => setItem({ ...item, precio: parseFloat(e.target.value) })}
+                value={item.devaluacion}
+                onChange={(e) => setItem({ ...item, devaluacion: e.target.value })}
               />
             </Grid>
           </Grid>
@@ -137,14 +125,13 @@ const Dashboard: React.FC = () => {
       </Paper>
 
       <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="Tabla Colecciones">
+        <Table sx={{ minWidth: 650 }} aria-label="Tabla Devaluacion">
           <TableHead sx={{ backgroundColor: "#d05eff" }}>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell sx={{ color: "white" }}>Nombre</TableCell>
-              <TableCell sx={{ color: "white" }}>Marca</TableCell>
-              <TableCell sx={{ color: "white" }}>Tipo</TableCell>
-              <TableCell sx={{ color: "white" }}>Precio</TableCell>
+              <TableCell sx={{ color: "white" }}>articulo</TableCell>
+              <TableCell sx={{ color: "white" }}>meses</TableCell>
+              <TableCell sx={{ color: "white" }}>devaluacion</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -155,10 +142,9 @@ const Dashboard: React.FC = () => {
                     <DeleteForeverIcon />
                   </Button>
                 </TableCell>
-                <TableCell>{row.nombre}</TableCell>
-                <TableCell>{row.marca}</TableCell>
-                <TableCell>{row.tipo}</TableCell>
-                <TableCell>{row.precio}</TableCell>
+                <TableCell>{row.articulo}</TableCell>
+                <TableCell>{row.meses}</TableCell>
+                <TableCell>{row.devaluacion}</TableCell>
               </TableRow>
             ))}
           </TableBody>

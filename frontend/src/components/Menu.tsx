@@ -12,18 +12,18 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
+import { RootState } from '../store/index';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Tooltip from '@mui/material/Tooltip';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { RootState } from '../store/index';
 import { authActions } from '../store/authSlice';
-import pdfFile from '../assets/UT4A1_GiselaRM.pdf';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
@@ -72,7 +72,7 @@ export default function Menu() {
             </ListItem>
           </Link>
         )}
-        <Link to={pdfFile} target="_blank" style={{ textDecoration: 'none', color: 'black' }}>
+          <Link to={'/Home'} style={{ textDecoration: 'none', color: 'black' }}>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -106,7 +106,7 @@ export default function Menu() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <Tooltip title="Menú Hamburguesa" arrow placement="bottom">
+            <Tooltip title="Menu Hamburguesa" arrow placement="bottom">
               <MenuIcon />
             </Tooltip>
             <Drawer open={open} onClose={toggleDrawer(false)}>
@@ -117,13 +117,13 @@ export default function Menu() {
             <IconButton sx={{ color: 'white', flexGrow: 1 }}>{userData.userName}</IconButton>
           </Tooltip>
           {userData.userRol === 'admin' ? (
-            <Tooltip title="Icono Admin" arrow placement="bottom">
+            <Tooltip title="Icono admin" arrow placement="bottom">
               <IconButton color="inherit">
                 <AdminPanelSettingsIcon />
               </IconButton>
             </Tooltip>
           ) : (
-            <Tooltip title="Icono Usuario" arrow placement="bottom">
+            <Tooltip title="Icono user" arrow placement="bottom">
               <IconButton color="inherit">
                 <AccountCircle />
               </IconButton>
